@@ -1,6 +1,23 @@
+import time
+import nltk
 import streamlit as st
 from selfQeryRAG import RAGImplementation
-import time
+
+# Check if the NLTK data is already downloaded, if not, download it
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
+
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+
+try:
+    nltk.data.find('tokenizers/punkt_tab')
+except LookupError:
+    nltk.download('punkt_tab')
 
 # Initialize the RAG implementation
 rag_implementation = RAGImplementation()
@@ -25,7 +42,7 @@ def main():
         output = st.empty()
         for i in range(len(response)):
             output.write(response[:i+1])
-            time.sleep(0.015) 
+            time.sleep(0.0015) 
     elif think_button:
         st.warning("Please enter a question in the sidebar.")
 
